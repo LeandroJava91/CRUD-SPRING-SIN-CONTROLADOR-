@@ -1,5 +1,7 @@
 package com.example.integracion;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -45,7 +47,11 @@ public class Application {
         alumnoService.guardarAlumno(alumno);*/
 
         // Buscar un alumno por ID
+        
+        
         Alumno alumnoEncontrado = alumnoService.buscarAlumnoPorId(18L);
+        //eliminarAlumnoPorId(17L);
+        
 
         if (alumnoEncontrado != null) {
             // Imprimir los datos del alumno por consola
@@ -55,5 +61,22 @@ public class Application {
         } else {
             System.out.println("Alumno no encontrado");
         }
+        
+        ////////ELIMINAR ALUMNO////////////////////
+        alumnoService.eliminarAlumnoPorId(17L);
+        
+      
+        
+        /////////MODIFICAR ALUMNO////////
+        Alumno alumnomodi = new Alumno();
+        Optional<Colegio> colee= colegioService.findById(2l);
+        Colegio cole2 = colee.orElse(null);
+        
+        alumnomodi.setId(5l);
+        alumnomodi.setNombre("OSGUI");
+        alumnomodi.setColegio(cole2);
+        alumnoService.actualizarAlumno(alumnomodi);
+        
+        
     }
 }
